@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>前端用戶表</title>
+		<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+				  <div class="form-group">
+                        <div class="col-sm-2 control-label">用户名</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.username" placeholder="用户名"/>
+                        </div>
+                    </div>
+
+					<div class="form-group">
+                        <div class="col-sm-2 control-label">用户状态  1正常  2冻结 3禁用</div>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="status" value="1" v-model="fUser.status"/> 正常
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="status" value="2" v-model="fUser.status"/> 冻结
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="status" value="3" v-model="fUser.status"/> 禁用
+                            </label>
+                        </div>
+                    </div>
+
+
+				 <div class="form-group">
+                        <div class="col-sm-2 control-label">身份证</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.idCard" placeholder="身份证"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">真实姓名</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.realName" placeholder="真实姓名"/>
+                        </div>
+                    </div>
+											                 <!--   <div class="form-group">
+                        <div class="col-sm-2 control-label">身份证正面</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.idcardFront" placeholder="身份证正面"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">身份证反面</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.idcardReverse" placeholder="身份证反面"/>
+                        </div>
+                    </div>-->
+				 <div class="form-group">
+                        <div class="col-sm-2 control-label">性别</div>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="1" v-model="fUser.gender"/> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="gender" value="2" v-model="fUser.gender"/> 女
+                            </label>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">昵称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.nickname" placeholder="昵称"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">城市</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.city" placeholder="城市"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">usdt钱包地址</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.addressUsdt" placeholder="usdt钱包地址"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">eth钱包地址</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="fUser.addressEth" placeholder="eth钱包地址"/>
+                        </div>
+                    </div>
+						 <div class="form-group">
+                        <div class="col-sm-2 control-label">审核状态</div>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="0" v-model="fUser.type"/> 未审核
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="1" v-model="fUser.type"/> 审核成功
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="type" value="2" v-model="fUser.type"/> 审核拒绝
+                            </label>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label">是否复投</div>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="automaticOrder" value="1" v-model="fUser.automaticOrder"/> 是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="automaticOrder" value="0" v-model="fUser.automaticOrder"/> 否
+                            </label>
+                        </div>
+                    </div>
+
+				<div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" id="btnSaveOrUpdate" data-loading-text="保存中..." @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/app/fuser.js?_${.now?long}"></script>
+</body>
+</html>
