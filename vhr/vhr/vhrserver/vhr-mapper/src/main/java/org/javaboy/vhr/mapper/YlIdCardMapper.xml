@@ -10,10 +10,68 @@
     (#{id}, #{type},#{name}, #{isdefult}, #{createdTime}, #{createdWay}, #{userId}, #{subsidies}, #{reward}, #{persion}, #{seriousHelp}, #{ventureCapital}, #{publicWelfFund}, #{state})
   </insert>
 
-<!--  根据名字查询养老卡是否存在  -->
-  <select id="getYlIdCardByName" parameterType="java.lang.String" resultType="org.javaboy.vhr.model.YlIdCard">
+<!--  查询当前登录人名下的全部养老卡  -->
+  <select id="findAllYlIdCards" parameterType="java.lang.Integer" resultType="org.javaboy.vhr.model.YlIdCard">
       select * from
       yl_id_card
-      where name = #{name}
+      where userId = #{id}
   </select>
+<!--    查询当前用户下的默认的养老卡账号的ID-->
+    <select id="getDefaultYlIdCardId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select b.id from
+        yl_user a left join yl_id_card b on a.id = b.userId
+        where b.userId = #{id} and b.isdefult = "1"
+    </select>
+<!--    删除养老用户卡-->
+    <delete id="deleteYlIdCard" parameterType="java.lang.Integer">
+        delete  from
+        yl_id_card
+        where id = #{id}
+    </delete>
+<!--    修改养老用户卡-->
+    <update id="updateYlIdCard" parameterType="org.javaboy.vhr.model.YlIdCard">
+        update yl_id_card
+        <set>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="isdefult != null">
+                isdefult = #{isdefult},
+            </if>
+            <if test="createdTime != null">
+                createdTime = #{createdTime},
+            </if>
+            <if test="createdWay != null">
+                createdWay = #{createdWay},
+            </if>
+            <if test="userId != null">
+                userId = #{userId},
+            </if>
+            <if test="subsidies != null">
+                subsidies = #{subsidies},
+            </if>
+            <if test="reward != null">
+                reward = #{reward},
+            </if>
+            <if test="persion != null">
+                persion = #{persion},
+            </if>
+            <if test="seriousHelp != null">
+                seriousHelp = #{seriousHelp},
+            </if>
+            <if test="ventureCapital != null">
+                ventureCapital = #{ventureCapital},
+            </if>
+            <if test="publicWelfFund != null">
+                publicWelfFund = #{publicWelfFund},
+            </if>
+            <if test="state != null">
+                state = #{state},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
