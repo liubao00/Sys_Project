@@ -1,9 +1,11 @@
 package org.javaboy.vhr.service;
 
+import org.javaboy.vhr.Enum.YlUserNameEnum;
 import org.javaboy.vhr.mapper.YlIdCardMapper;
 import org.javaboy.vhr.mapper.YlUserMapper;
 import org.javaboy.vhr.model.YlIdCard;
 import org.javaboy.vhr.model.YlUser;
+import org.javaboy.vhr.utils.UserNameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,8 +43,9 @@ public class YlUserService {
             return 0;
         } else {
             ylUser.setUserPassword(new BCryptPasswordEncoder().encode(ylUser.getUserPassword()));
+            ylUser.setUserName(UserNameUtils.getStringRandom(10));
             ylUserMapper.webRegister(ylUser);
-            ylIdCard.setName("养老卡");//设置第一个默认的账户名称
+            ylIdCard.setName(YlUserNameEnum.First_YlUserName);//设置第一个默认的账户名称
             ylIdCard.setUserId(ylUser.getId());
             ylIdCardMapper.addYlIdCard(ylIdCard);
             return 1;
