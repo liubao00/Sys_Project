@@ -5,9 +5,7 @@ import org.javaboy.vhr.model.YlUser;
 import org.javaboy.vhr.service.YlIdCardService;
 import org.javaboy.vhr.service.YlUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 养老用户
@@ -27,7 +25,7 @@ public class YlUserController {
      * @return
      */
     @PostMapping("/webLogin")
-    public RespBean webLogin(YlUser ylUser) {
+    public RespBean webLogin(@RequestBody YlUser ylUser) {
         if (ylUserService.webLogin(ylUser) == 1) {
             Integer id = ylUserService.getUserIdByPhoneNum(ylUser.getPhoneNum());
             return RespBean.ok("登录成功").setObj(id);
@@ -40,7 +38,7 @@ public class YlUserController {
      * @param ylUser
      */
     @PostMapping("/webRegister")
-    public RespBean webRegister(YlUser ylUser) {
+    public RespBean webRegister(@RequestBody YlUser ylUser) {
         if (ylUserService.webRegister(ylUser) == 1) {
             Integer cardId = ylIdCardService.getDefaultYlIdCardId(ylUser.getId());
             return RespBean.ok("注册成功").setObj(cardId);
@@ -53,7 +51,7 @@ public class YlUserController {
      * @param ylUser
      */
     @PostMapping("/backPassword")
-    public RespBean backPassword(YlUser ylUser) {
+    public RespBean backPassword(@RequestBody YlUser ylUser) {
         if (ylUserService.backPassword(ylUser) == 1) {
             return RespBean.ok("密码找回成功");
         }

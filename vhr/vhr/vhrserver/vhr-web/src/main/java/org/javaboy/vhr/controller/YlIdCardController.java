@@ -22,7 +22,7 @@ public class YlIdCardController {
      * @return
      */
     @PostMapping("/addYlIdCard")
-    public RespBean addYlIdCard(YlIdCard ylIdCard) {
+    public RespBean addYlIdCard(@RequestBody YlIdCard ylIdCard) {
         if (ylIdCardService.addYlIdCard(ylIdCard) == 1) {
             return RespBean.ok("添加养老用户表成功");
         }
@@ -61,7 +61,7 @@ public class YlIdCardController {
      * @return
      */
     @PostMapping("/updateYlIdCard")
-    public RespBean updateYlIdCard(YlIdCard ylIdCard) {
+    public RespBean updateYlIdCard(@RequestBody YlIdCard ylIdCard) {
         if (ylIdCardService.updateYlIdCard(ylIdCard) == 1) {
             return RespBean.ok("修改养老用户表成功");
         }
