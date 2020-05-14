@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.YlUserMapper" >
+
+  <!--  用户的注册-->
+  <insert id="webRegister" parameterType="org.javaboy.vhr.model.YlUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into yl_user(id, createdBy,createdTime,updatedBy,updatedTime,userId,userName, userPassword,userState,token,phoneNum, inviteId)
+    values (#{id}, #{createdBy}, #{createdTime},#{updatedBy},#{updatedTime},#{userId},#{userName},#{userPassword},#{userState},#{token},#{phoneNum}, #{inviteId})
+  </insert>
+  <!--用户的登录-->
+  <select id="webLogin" parameterType="java.lang.String" resultType="org.javaboy.vhr.model.YlUser">
+    select *
+    from yl_user
+     where phoneNum = #{phoneNum} and userPassword = #{userPassword}
+  </select>
+
+<!--  根据手机号查找用户-->
+  <select id="getUserByPhoneNum" parameterType="java.lang.String" resultType="org.javaboy.vhr.model.YlUser">
+    select *
+    from yl_user
+    where phoneNum = #{phoneNum}
+  </select>
+</mapper>
