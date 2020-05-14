@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.javaboy.vhr.mapper.YlIdCardMapper" >
+
+  <!--  养老卡账户的添加-->
+  <insert id="addYlIdCard" parameterType="org.javaboy.vhr.model.YlIdCard" useGeneratedKeys="true" keyProperty="id">
+    insert into yl_id_card
+    (id, type, name, isdefult, createdTime, createdWay, userId, subsidies, reward, persion, seriousHelp, ventureCapital, publicWelfFund, state)
+    values
+    (#{id}, #{type},#{name}, #{isdefult}, #{createdTime}, #{createdWay}, #{userId}, #{subsidies}, #{reward}, #{persion}, #{seriousHelp}, #{ventureCapital}, #{publicWelfFund}, #{state})
+  </insert>
+
+<!--  根据名字查询养老卡是否存在  -->
+  <select id="getYlIdCardByName" parameterType="java.lang.String" resultType="org.javaboy.vhr.model.YlIdCard">
+      select * from
+      yl_id_card
+      where name = #{name}
+  </select>
+</mapper>

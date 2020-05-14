@@ -1,14 +1,14 @@
 package org.javaboy.vhr.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
+
 /**
-        * @author jianfengLIan
-        * @time 2020年5月13日14:45:07
-        * @deprecated id卡号模型
+ * 养老卡
  */
 public class YlIdCard {
     /** ID;ID号唯一 */
-    private String id ;
+    private Integer id ;
     /** 类型;0：正常注册；1：拼团 */
     private String type ;
     /** 备注名;卡别名 */
@@ -16,52 +16,31 @@ public class YlIdCard {
     /** 是否默认账号;1；默认 */
     private String isdefult ;
     /** 创建时间 */
-    private Date createdTime ;
+    private String createdTime ;
     /** 创建方式;0：推荐注册；1：系统生成 */
     private String createdWay ;
     /** 用户ID;用户id */
-    private String userId ;
+    private Integer userId ;
     /** 补贴 */
-    private Double subsidies ;
+    private BigDecimal subsidies ;
     /** 奖励 */
-    private Double reward ;
+    private BigDecimal reward ;
     /** 养老基金 */
-    private Double persion ;
+    private BigDecimal persion ;
     /** 大病互助 */
-    private Double seriousHelp ;
+    private BigDecimal seriousHelp ;
     /** 创业基金 */
-    private Double ventureCapital ;
+    private BigDecimal ventureCapital ;
     /** 公益金 */
-    private Double publicWelfFund ;
+    private BigDecimal publicWelfFund ;
     /** 状态;0:正常；1：冻结 */
     private String state ;
 
-    public YlIdCard() {
-
-    }
-
-    public YlIdCard(String id, String type, String name, String isdefult, Date createdTime, String createdWay, String userId, Double subsidies, Double reward, Double persion, Double seriousHelp, Double ventureCapital, Double publicWelfFund, String state) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.isdefult = isdefult;
-        this.createdTime = createdTime;
-        this.createdWay = createdWay;
-        this.userId = userId;
-        this.subsidies = subsidies;
-        this.reward = reward;
-        this.persion = persion;
-        this.seriousHelp = seriousHelp;
-        this.ventureCapital = ventureCapital;
-        this.publicWelfFund = publicWelfFund;
-        this.state = state;
-    }
-
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -89,11 +68,11 @@ public class YlIdCard {
         this.isdefult = isdefult;
     }
 
-    public Date getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 
@@ -105,59 +84,59 @@ public class YlIdCard {
         this.createdWay = createdWay;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Double getSubsidies() {
+    public BigDecimal getSubsidies() {
         return subsidies;
     }
 
-    public void setSubsidies(Double subsidies) {
+    public void setSubsidies(BigDecimal subsidies) {
         this.subsidies = subsidies;
     }
 
-    public Double getReward() {
+    public BigDecimal getReward() {
         return reward;
     }
 
-    public void setReward(Double reward) {
+    public void setReward(BigDecimal reward) {
         this.reward = reward;
     }
 
-    public Double getPersion() {
+    public BigDecimal getPersion() {
         return persion;
     }
 
-    public void setPersion(Double persion) {
+    public void setPersion(BigDecimal persion) {
         this.persion = persion;
     }
 
-    public Double getSeriousHelp() {
+    public BigDecimal getSeriousHelp() {
         return seriousHelp;
     }
 
-    public void setSeriousHelp(Double seriousHelp) {
+    public void setSeriousHelp(BigDecimal seriousHelp) {
         this.seriousHelp = seriousHelp;
     }
 
-    public Double getVentureCapital() {
+    public BigDecimal getVentureCapital() {
         return ventureCapital;
     }
 
-    public void setVentureCapital(Double ventureCapital) {
+    public void setVentureCapital(BigDecimal ventureCapital) {
         this.ventureCapital = ventureCapital;
     }
 
-    public Double getPublicWelfFund() {
+    public BigDecimal getPublicWelfFund() {
         return publicWelfFund;
     }
 
-    public void setPublicWelfFund(Double publicWelfFund) {
+    public void setPublicWelfFund(BigDecimal publicWelfFund) {
         this.publicWelfFund = publicWelfFund;
     }
 
