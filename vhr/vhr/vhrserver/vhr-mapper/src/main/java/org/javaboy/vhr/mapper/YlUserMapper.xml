@@ -3,9 +3,8 @@
 <mapper namespace="org.javaboy.vhr.mapper.YlUserMapper" >
 
   <!--  用户的注册-->
-  <insert id="webRegister" parameterType="org.javaboy.vhr.model.YlUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-    insert into yl_user(id, createdBy,createdTime,updatedBy,updatedTime,userId,userName, userPassword,userState,token,phoneNum, inviteId)
-    values (#{id}, #{createdBy}, #{createdTime},#{updatedBy},#{updatedTime},#{userId},#{userName},#{userPassword},#{userState},#{token},#{phoneNum}, #{inviteId})
+  <insert id="webRegister" parameterType="org.javaboy.vhr.model.YlUser" statementType="CALLABLE">
+  {call yl_register(#{phoneNum,mode=IN,jdbcType=VARCHAR},#{userPassword,mode=IN,jdbcType=VARCHAR},#{inviteId,mode=IN,jdbcType=VARCHAR})}
   </insert>
   <!--用户的登录-->
   <select id="webLogin" parameterType="java.lang.String" resultType="org.javaboy.vhr.model.YlUser">
@@ -20,4 +19,51 @@
     from yl_user
     where phoneNum = #{phoneNum}
   </select>
+
+<!--  根据手机号查找养老用户的ID-->
+  <select id="getUserIdByPhoneNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select id
+    from yl_user
+    where phoneNum = #{phoneNum}
+  </select>
+<!--  找回密码-->
+  <update id="backPassword" parameterType="org.javaboy.vhr.model.YlUser">
+    update yl_user
+    <set>
+      <if test="createdBy != null">
+        createdBy = #{createdBy},
+      </if>
+      <if test="createdTime != null">
+        createdTime = #{createdTime},
+      </if>
+      <if test="updatedBy != null">
+        updatedBy = #{updatedBy},
+      </if>
+      <if test="updatedTime != null">
+        updatedTime = #{updatedTime},
+      </if>
+      <if test="userId != null">
+        userId = #{userId},
+      </if>
+      <if test="userName != null">
+        userName = #{userName},
+      </if>
+      <if test="userPassword != null">
+        userPassword = #{userPassword},
+      </if>
+      <if test="userState != null">
+        userState = #{userState},
+      </if>
+      <if test="token != null">
+        token = #{token},
+      </if>
+      <if test="phoneNum != null">
+        phoneNum = #{phoneNum},
+      </if>
+      <if test="inviteId != null">
+        inviteId = #{inviteId},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
 </mapper>
