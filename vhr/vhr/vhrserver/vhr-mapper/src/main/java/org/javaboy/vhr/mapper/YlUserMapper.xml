@@ -24,7 +24,7 @@
   <select id="getUserIdByPhoneNum" parameterType="java.lang.String" resultType="java.lang.Integer">
     select id
     from yl_user
-    where phoneNum = #{phoneNum}
+    where PHONE_NUM = #{phoneNum}
   </select>
 <!--  找回密码-->
   <update id="backPassword" parameterType="org.javaboy.vhr.model.YlUser">

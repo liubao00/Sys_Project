@@ -40,8 +40,8 @@ public class YlUserController {
     @PostMapping("/webRegister")
     public RespBean webRegister(@RequestBody YlUser ylUser) {
         if (ylUserService.webRegister(ylUser) == 1) {
-            Integer cardId = ylIdCardService.getDefaultYlIdCardId(ylUser.getId());
-            return RespBean.ok("注册成功").setObj(cardId);
+//            Integer cardId = ylIdCardService.getDefaultYlIdCardId(ylUser.getId());
+            return RespBean.ok("注册成功").setObj(ylUser);
         }
         return RespBean.ok("注册失败");
     }
